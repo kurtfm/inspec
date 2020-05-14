@@ -10,8 +10,7 @@ module Inspec
     #
     #
     module JsonProfileSummary
-      def self.produce_json(info:, write_path: "", suppress_output: false, logger:)
-        @logger = logger || Logger.new
+      def self.produce_json(info:, write_path: "", suppress_output: false)
         # add in inspec version
         info[:generator] = {
           name: "inspec",
@@ -22,9 +21,9 @@ module Inspec
         else
           unless suppress_output
             if File.exist? dst
-              @logger.info "----> updating #{dst}"
+              Inspec::Log.info "----> updating #{dst}"
             else
-              @logger.info "----> creating #{dst}"
+              Inspec::Log.info "----> creating #{dst}"
             end
           end
           fdst = File.expand_path(write_path)
