@@ -20,14 +20,14 @@ module Inspec
           puts JSON.dump(info)
         else
           unless suppress_output
-            if File.exist? dst
-              Inspec::Log.info "----> updating #{dst}"
+            if File.exist? write_path
+              Inspec::Log.info "----> updating #{write_path}"
             else
-              Inspec::Log.info "----> creating #{dst}"
+              Inspec::Log.info "----> creating #{write_path}"
             end
           end
-          fdst = File.expand_path(write_path)
-          File.write(fdst, JSON.dump(info))
+          full_write_path = File.expand_path(write_path)
+          File.write(full_write_path, JSON.dump(info))
         end
       end
     end
